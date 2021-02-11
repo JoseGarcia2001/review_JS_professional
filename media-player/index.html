@@ -4,10 +4,31 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/style.css" />
     <title>Media Player</title>
   </head>
   <body>
-    <h1></h1>
+    <main>
+      <div class="media-container">
+        <h1>My Media Player</h1>
+        <video
+          class="media-video"
+          src="./assets/BigBuckBunny_512kb.mp4"
+        ></video>
+        <div class="play-container">
+          <img
+            class="play-button"
+            src="https://img.icons8.com/plasticine/100/000000/play.png"
+          />
+          <p>¡Play!</p>
+        </div>
+      </div>
+    </main>
     <script src="./index.js"></script>
   </body>
 </html>

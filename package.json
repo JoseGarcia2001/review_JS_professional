@@ -1,0 +1,20 @@
+{
+  "name": "js-professional",
+  "version": "1.0.0",
+  "description": "Repaso conceptos claves del curso profesional de JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseGarcia2001/review_JS_professional.git"
+  },
+  "keywords": [],
+  "author": "Jose Garcia <jagarcia7655@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoseGarcia2001/review_JS_professional/issues"
+  },
+  "homepage": "https://github.com/JoseGarcia2001/review_JS_professional#readme"
+}

@@ -1,19 +1,33 @@
-const miMedia = document.querySelector(".media-video");
+import MediaPlayer from "./MediaPlayer.js";
+import AutoPlay from "./plugins/AutoPlay.js";
 
-const togglePlay = (() => {
-  const buttonToToggle = document.querySelector(".play-button");
+const playButton = document.querySelector(".play-container");
+const muteButton = document.querySelector(".mute-container");
+
+const miMedia = document.querySelector(".media-video");
+const myPlayer = new MediaPlayer({
+  media: miMedia,
+  plugins: [new AutoPlay()],
+});
+
+playButton.addEventListener("click", () => {
+  const imageToToggle = document.querySelector(".play-button");
   const buttonMessage = document.querySelector(".play-container p");
+
   const playSource = "https://img.icons8.com/plasticine/100/000000/play.png";
   const pauseSource = "https://img.icons8.com/plasticine/100/000000/pause.png";
-  buttonToToggle.addEventListener("click", () => {
-    if (buttonToToggle.src === playSource) {
-      miMedia.play();
-      buttonToToggle.src = pauseSource;
-      buttonMessage.textContent = "Pause :/";
-    } else {
-      miMedia.pause();
-      buttonToToggle.src = playSource;
-      buttonMessage.textContent = "¡Play!";
-    }
-  });
-})();
+
+  if (myPlayer.media.paused) {
+    myPlayer.togglePlay();
+    imageToToggle.src = pauseSource;
+    buttonMessage.textContent = "Pause :/";
+  } else {
+    myPlayer.togglePlay();
+    imageToToggle.src = playSource;
+    buttonMessage.textContent = "¡Play!";
+  }
+});
+
+muteButton.addEventListener("click", () => {
+  myPlayer.toggleMute();
+});

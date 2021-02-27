@@ -84,3 +84,56 @@ superman.pelear();
 const batman = new Heroes("Batman");
 batman.saludar();
 batman.pelear();
+
+// Con clases
+
+class SuperHeros {
+  constructor(name) {
+    this.name = name;
+  }
+
+  saludar() {
+    console.log(`Hola! Soy ${this.name}`);
+  }
+
+  pelear() {
+    console.log(`Hola! Soy ${this.name} y te golpeo`);
+  }
+}
+
+const batman = new SuperHeros("Batman");
+batman.saludar();
+batman.pelear();
+
+const superman = new SuperHeros("Superman");
+superman.saludar();
+superman.pelear();
+
+function counter(n) {
+  let myCounter = n;
+
+  const modifyCounter = (value) => {
+    myCounter += value;
+    console.log(myCounter);
+  };
+
+  return modifyCounter;
+}
+
+const joseCounter = counter(100);
+
+joseCounter(3);
+joseCounter(5);
+joseCounter(-8);
+
+function test(v) {
+  this.value = v;
+  console.log(this);
+}
+
+function hola() {
+  console.log(this);
+}
+
+test();
+hola();

@@ -17,7 +17,3 @@ MediaPlayer.prototype.runPlugins = function () {
 };
 
 export default MediaPlayer;
-
-function saludar() {
-  console.log(`Hola! soy ${this.name} ${this.apellido}`);
-}

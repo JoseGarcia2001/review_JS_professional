@@ -29,9 +29,25 @@ h1 {
   font-size: 50px;
 }
 
+h2 {
+  margin-top: 60px;
+  font-size: 30px;
+  color: #60be92;
+}
+
+.comments {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
 .manage-media {
   display: flex;
   gap: 50px;
+}
+
+p {
+  color: black;
 }
 
 .play-container,
@@ -41,4 +57,6 @@ h1 {
   font-size: 30px;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
 }

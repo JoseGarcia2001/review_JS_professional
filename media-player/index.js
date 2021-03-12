@@ -1,5 +1,6 @@
 import MediaPlayer from "./MediaPlayer.js";
 import AutoPlay from "./plugins/AutoPlay.js";
+import AutoPause from "./plugins/AutoPause.js";
 
 const playButton = document.querySelector(".play-container");
 const muteButton = document.querySelector(".mute-container");
@@ -7,7 +8,7 @@ const muteButton = document.querySelector(".mute-container");
 const miMedia = document.querySelector(".media-video");
 const myPlayer = new MediaPlayer({
   media: miMedia,
-  plugins: [new AutoPlay()],
+  plugins: [new AutoPlay(), new AutoPause()],
 });
 
 playButton.addEventListener("click", () => {

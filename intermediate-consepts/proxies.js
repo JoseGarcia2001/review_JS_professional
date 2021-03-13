@@ -8,11 +8,11 @@ const handler = {
   set: function (obj, prop, value) {
     if (prop in obj) {
       obj[prop] = value;
+    } else {
+      console.error(
+        `Lo siento, la propiedad ${prop}, no existe. Intentalo de nuevo`
+      );
     }
-
-    console.error(
-      `Lo siento, la propiedad ${prop}, no existe. Intentalo de nuevo`
-    );
   },
 
   get: function (obj, prop) {

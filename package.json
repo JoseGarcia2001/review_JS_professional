@@ -4,7 +4,7 @@
   "description": "Repaso conceptos claves del curso profesional de JavaScript",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel media-player/index.html typescript/*.html"
   },
   "repository": {
     "type": "git",
@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/JoseGarcia2001/review_JS_professional/issues"
   },
-  "homepage": "https://github.com/JoseGarcia2001/review_JS_professional#readme"
+  "homepage": "https://github.com/JoseGarcia2001/review_JS_professional#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^4.2.3"
+  },
+  "browserslist": [
+    "last 1 chrome version"
+  ]
 }

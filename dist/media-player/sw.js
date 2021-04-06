@@ -124,7 +124,15 @@ self.addEventListener("install", event => {
 
 async function prechache() {
   const cache = await caches.open("v1");
-  return cache.addAll(["./", "./index.js", "./index.html", "./MediaPlayer.js", "./assets/BigBuckBunny_512kb.mp4", "./assets/style.css", "./plugins/AutoPause.js", "./plugins/AutoPlay.js"]);
+  return cache.addAll([// "./",
+    // "./index.js",
+    // "./index.html",
+    // "./MediaPlayer.js",
+    // "./assets/BigBuckBunny_512kb.mp4",
+    // "./assets/style.css",
+    // "./plugins/AutoPause.js",
+    // "./plugins/AutoPlay.js",
+  ]);
 }
 
 self.addEventListener("fetch", event => {
@@ -179,7 +187,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45285" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45187" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

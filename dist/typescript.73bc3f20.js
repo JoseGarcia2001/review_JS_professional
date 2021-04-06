@@ -118,7 +118,41 @@ parcelRequire = (function (modules, cache, entry, globalName) {
 
   return newRequire;
 })({"typescript/index.ts":[function(require,module,exports) {
-console.log("test");
+// Typos in TS
+// Number
+var edad = 15;
+var edadSumada = 2;
+var edadEnDosAños = edad + edad; // Boolean
+
+var isTrue = true; // String
+
+var myName = "Joselin"; // Arrays
+
+var personas = [];
+personas = ["Jose", "Andres"];
+var personasYNumeros = [];
+personasYNumeros = ["Jose", 3, "Andres"];
+personasYNumeros.push("Joselin"); // Enums
+
+var Colores;
+
+(function (Colores) {
+  Colores["rojo"] = "red";
+  Colores["verde"] = "green";
+  Colores["azul"] = "blue";
+})(Colores || (Colores = {}));
+
+var color = Colores.rojo; // Any
+
+var variable = [];
+variable = {};
+variable = "ey!"; // Objects
+
+var pokemon = {
+  name: "pikachu"
+};
+console.log("test"); // Functions
+// Retornando un valor primitivo
 
 function add(a, b) {
   return a + b;
@@ -126,6 +160,26 @@ function add(a, b) {
 
 var sum = add(3, 5);
 console.log(sum);
+
+function createAdder(a) {
+  return function (b) {
+    return console.log(a + b);
+  };
+}
+
+var sumarATres = createAdder(3);
+sumarATres(6);
+
+function myFullName(firstName, lastName) {
+  return console.log(firstName + " " + lastName);
+}
+
+myFullName("Jose");
+var jose = {
+  name: "Jose",
+  edad: 12 // isColombian: true
+
+};
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -154,7 +208,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45285" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45187" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

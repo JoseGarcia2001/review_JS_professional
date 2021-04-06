@@ -5,14 +5,14 @@ self.addEventListener("install", (event) => {
 async function prechache() {
   const cache = await caches.open("v1");
   return cache.addAll([
-    "./",
-    "./index.js",
-    "./index.html",
-    "./MediaPlayer.js",
-    "./assets/BigBuckBunny_512kb.mp4",
-    "./assets/style.css",
-    "./plugins/AutoPause.js",
-    "./plugins/AutoPlay.js",
+    // "./",
+    // "./index.js",
+    // "./index.html",
+    // "./MediaPlayer.js",
+    // "./assets/BigBuckBunny_512kb.mp4",
+    // "./assets/style.css",
+    // "./plugins/AutoPause.js",
+    // "./plugins/AutoPlay.js",
   ]);
 }
 

@@ -117,69 +117,65 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"typescript/index.ts":[function(require,module,exports) {
-// Typos in TS
-// Number
-var edad = 15;
-var edadSumada = 2;
-var edadEnDosAños = edad + edad; // Boolean
+})({"designPatterns/Observer/Observer.ts":[function(require,module,exports) {
+var ObservedElement =
+/** @class */
+function () {
+  function ObservedElement(el) {
+    var _this = this;
 
-var isTrue = true; // String
+    this.el = el;
+    this.el.addEventListener("input", function () {
+      _this.notify(_this.el.value);
+    });
+    this.observers = [];
+  }
 
-var myName = "Joselin"; // Arrays
-
-var personas = [];
-personas = ["Jose", "Andres"];
-var personasYNumeros = [];
-personasYNumeros = ["Jose", 3, "Andres"];
-personasYNumeros.push("Joselin"); // Enums
-
-var Colores;
-
-(function (Colores) {
-  Colores["rojo"] = "red";
-  Colores["verde"] = "green";
-  Colores["azul"] = "blue";
-})(Colores || (Colores = {}));
-
-var color = Colores.rojo; // Any
-
-var variable = [];
-variable = {};
-variable = "ey!"; // Objects
-
-var pokemon = {
-  name: "pikachu"
-};
-console.log("test"); // Functions
-// Retornando un valor primitivo
-
-function add(a, b) {
-  return a + b;
-}
-
-var sum = add(3, 5);
-console.log(sum);
-
-function createAdder(a) {
-  return function (b) {
-    return console.log(a + b);
+  ObservedElement.prototype.subscribe = function (observer) {
+    this.observers.push(observer);
   };
-}
 
-var sumarATres = createAdder(3);
-sumarATres(6);
+  ObservedElement.prototype.unsubscribe = function (observer) {
+    var elementToUnsubscribe = this.observers.findIndex(function (element) {
+      return element === observer;
+    });
+    this.observers.splice(elementToUnsubscribe, 1);
+  };
 
-function myFullName(firstName, lastName) {
-  return console.log(firstName + " " + lastName);
-}
+  ObservedElement.prototype.notify = function (data) {
+    this.observers.forEach(function (observer) {
+      return observer.update(data);
+    });
+  };
 
-myFullName("Jose");
-var jose = {
-  name: "Jose",
-  edad: 12 // isColombian: true
+  return ObservedElement;
+}();
 
-};
+var ObserverElement =
+/** @class */
+function () {
+  function ObserverElement(el) {
+    this.el = el;
+  }
+
+  ObserverElement.prototype.update = function (data) {
+    this.el.innerText = data;
+  };
+
+  return ObserverElement;
+}();
+
+var elObserved = document.querySelector("#subject");
+var elObserver = document.querySelector("#observer");
+var elObserver2 = document.querySelector("#observer2");
+var observed = new ObservedElement(elObserved);
+var observer = new ObserverElement(elObserver);
+var observer2 = new ObserverElement(elObserver2);
+observed.subscribe(observer);
+observed.subscribe(observer2);
+setTimeout(function () {
+  return observed.unsubscribe(observer2);
+}, 5000);
 },{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -383,5 +379,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","typescript/index.ts"], null)
-//# sourceMappingURL=/typescript.73bc3f20.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","designPatterns/Observer/Observer.ts"], null)
+//# sourceMappingURL=/Observer.78d935bd.js.map

@@ -4,7 +4,7 @@
   "description": "Repaso conceptos claves del curso profesional de JavaScript",
   "main": "index.js",
   "scripts": {
-    "start": "parcel media-player/index.html typescript/*.html"
+    "start": "parcel media-player/index.html typescript/*.html designPatterns/*/*.html"
   },
   "repository": {
     "type": "git",

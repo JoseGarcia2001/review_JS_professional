@@ -117,70 +117,49 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"typescript/index.ts":[function(require,module,exports) {
-// Typos in TS
-// Number
-var edad = 15;
-var edadSumada = 2;
-var edadEnDosAños = edad + edad; // Boolean
+})({"designPatterns/Singleton/singleton.ts":[function(require,module,exports) {
+"use strict";
 
-var isTrue = true; // String
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
-var myName = "Joselin"; // Arrays
+var Singleton =
+/** @class */
+function () {
+  function Singleton() {}
 
-var personas = [];
-personas = ["Jose", "Andres"];
-var personasYNumeros = [];
-personasYNumeros = ["Jose", 3, "Andres"];
-personasYNumeros.push("Joselin"); // Enums
+  Singleton.getInstance = function () {
+    if (!Singleton.instance) {
+      Singleton.instance = new Singleton();
+    }
 
-var Colores;
-
-(function (Colores) {
-  Colores["rojo"] = "red";
-  Colores["verde"] = "green";
-  Colores["azul"] = "blue";
-})(Colores || (Colores = {}));
-
-var color = Colores.rojo; // Any
-
-var variable = [];
-variable = {};
-variable = "ey!"; // Objects
-
-var pokemon = {
-  name: "pikachu"
-};
-console.log("test"); // Functions
-// Retornando un valor primitivo
-
-function add(a, b) {
-  return a + b;
-}
-
-var sum = add(3, 5);
-console.log(sum);
-
-function createAdder(a) {
-  return function (b) {
-    return console.log(a + b);
+    return Singleton.instance;
   };
-}
 
-var sumarATres = createAdder(3);
-sumarATres(6);
+  return Singleton;
+}();
 
-function myFullName(firstName, lastName) {
-  return console.log(firstName + " " + lastName);
-}
+exports.default = Singleton;
+},{}],"designPatterns/Singleton/index.ts":[function(require,module,exports) {
+"use strict";
 
-myFullName("Jose");
-var jose = {
-  name: "Jose",
-  edad: 12 // isColombian: true
-
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
 };
-},{}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var singleton_1 = __importDefault(require("./singleton"));
+
+var a = singleton_1.default.getInstance();
+var b = singleton_1.default.getInstance();
+console.log("\u00BFAmbas instancias son iguales? " + (a === b));
+},{"./singleton":"designPatterns/Singleton/singleton.ts"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -383,5 +362,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","typescript/index.ts"], null)
-//# sourceMappingURL=/typescript.73bc3f20.js.map
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","designPatterns/Singleton/index.ts"], null)
+//# sourceMappingURL=/Singleton.82aad9e1.js.map

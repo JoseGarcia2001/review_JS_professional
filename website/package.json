@@ -1,0 +1,31 @@
+{
+  "name": "js-professional",
+  "version": "1.0.0",
+  "description": "Repaso conceptos claves del curso profesional de JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc *.ts",
+    "start": "parcel index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JoseGarcia2001/review_JS_professional.git"
+  },
+  "keywords": [],
+  "author": "Jose Garcia <jagarcia7655@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JoseGarcia2001/review_JS_professional/issues"
+  },
+  "homepage": "https://github.com/JoseGarcia2001/review_JS_professional#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.3",
+    "typescript": "^4.2.3"
+  },
+  "browserslist": [
+    "last 1 chrome version"
+  ],
+  "dependencies": {
+    "@joga_dev/mediaplayer": "^1.0.0"
+  }
+}

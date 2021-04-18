@@ -166,8 +166,9 @@ function () {
   function AutoPlay() {}
 
   AutoPlay.prototype.run = function (media) {
+    this.media = media.media;
+    this.media.muted = true;
     media.togglePlay();
-    media.toggleMute();
   };
 
   return AutoPlay;
@@ -216,7 +217,163 @@ function () {
 }();
 
 exports.default = AutoPause;
-},{}],"media-player/index.ts":[function(require,module,exports) {
+},{}],"media-player/plugins/Ads/Ads.ts":[function(require,module,exports) {
+"use strict";
+
+var __spreadArray = this && this.__spreadArray || function (to, from) {
+  for (var i = 0, il = from.length, j = to.length; i < il; i++, j++) to[j] = from[i];
+
+  return to;
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var ALL_ADS = [{
+  imageUrl: "https://static.platzi.com/media/achievements/badge-profesional-javascript-13538df2-24ce-433f-9aa6-e34eed608e70.png",
+  title: "Curso Profesional de JavaScript",
+  body: "Mejora tus habilidades en Javascript. Conoce Typescript y cómo puedes ocuparlo para mejorar el control de tus variables.",
+  url: "https://platzi.com/cursos/javascript-profesional/"
+}, {
+  imageUrl: "https://static.platzi.com/media/achievements/badge-frontend-developer-8a49e681-3e22-408d-b886-2f47dfc9953a.png",
+  title: "Curso de Frontend Developer",
+  body: "Domina las bases de HTML y CSS. Define la arquitectura de tu código y construye un sitio web usando componentes estáticos. ",
+  url: "https://platzi.com/cursos/frontend-developer/"
+}, {
+  imageUrl: "https://static.platzi.com/media/achievements/badge-backend-node-8e6aa8a9-f7cd-42b7-bf4a-e1ee916a942b.png",
+  title: "Curso de Backend con Node.js",
+  body: "Crea aplicaciones backend utilizando Node.js, Express y Mongo. Entiende cómo funciona Javascript en un servidor y escribe aplicaciones con Node.js.",
+  url: "https://platzi.com/cursos/backend-nodejs/"
+}, {
+  imageUrl: "https://static.platzi.com/media/achievements/badge-prework-da6b0493-9908-40f3-ad53-f5d330b995b8.png",
+  title: "Comienza tus proyectos de desarrollo para JavaScript configurando un entorno de desarrollo cómodo y adaptado a tus necesidades.",
+  body: "Mejora tus habilidades en Javascript. Conoce Typescript y cómo puedes ocuparlo para mejorar el control de tus variables.",
+  url: "https://platzi.com/cursos/prework/"
+}, {
+  imageUrl: "https://static.platzi.com/media/achievements/badge-autenticacion-passport-6d45426a-2b24-4757-8927-7bfaf54529dd.png",
+  title: "Curso de Autenticación con Passport.js",
+  body: "Genera estrategias de autenticación Sign-In y Sign-Out usando Passport.js. Agrega autenticación con Facebook, Twitter y Google a tus desarrollos.",
+  url: "https://platzi.com/cursos/passport/"
+}, {
+  imageUrl: "https://static.platzi.com/media/achievements/badge-backend-frontend-02b2ac18-331a-4959-85bf-0bd3c2aa009c.png",
+  title: "Curso de Backend for Frontend",
+  body: "La ingeniería de software evoluciona día a día, no te quedes atrás. Ahora que eres un Desarrollador FullStack JavaScript necesitas evolucionar con el software, construye arquitecturas de software modernas.",
+  url: "https://platzi.com/cursos/bff/"
+}, {
+  imageUrl: "https://static.platzi.com/media/achievements/badge-react-adec89d0-1c35-4c9c-847e-18c284dc79dd.png",
+  title: "Curso Práctico de React JS",
+  body: "React es una de las librerías más utilizadas hoy para crear aplicaciones web. Aprende a través de la creación de la interfaz de PlatziVideo todo lo que necesitas para crear increíbles componentes con React.      ",
+  url: "https://platzi.com/cursos/react-ejs/"
+}, {
+  imageUrl: "https://static.platzi.com/media/achievements/badge-react-redux-2ca3c0a5-fc53-437f-bfba-69e9ddd5a803.png",
+  title: "Curso de React Router y Redux",
+  body: "Aprende de forma práctica a implementar React Router para manejar rutas en tus proyectos de frontend como un profesional.",
+  url: "https://platzi.com/cursos/react-router-redux/"
+}];
+
+var Ads =
+/** @class */
+function () {
+  function Ads() {
+    this.initAds();
+  }
+
+  Ads.getInstance = function () {
+    if (!Ads.instance) {
+      Ads.instance = new Ads();
+    }
+
+    return Ads.instance;
+  };
+
+  Ads.prototype.initAds = function () {
+    this.ads = __spreadArray([], ALL_ADS);
+  };
+
+  Ads.prototype.getAd = function () {
+    if (this.ads.length === 0) {
+      this.initAds();
+    }
+
+    return this.ads.pop();
+  };
+
+  return Ads;
+}();
+
+exports.default = Ads;
+},{}],"media-player/plugins/Ads/index.ts":[function(require,module,exports) {
+"use strict";
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var Ads_1 = __importDefault(require("./Ads"));
+
+var DisplayAdds =
+/** @class */
+function () {
+  function DisplayAdds() {
+    this.adContainer = document.createElement("div");
+    this.ads = Ads_1.default.getInstance();
+    this.handleTimeUpdate = this.handleTimeUpdate.bind(this);
+  }
+
+  DisplayAdds.prototype.run = function (media) {
+    this.media = media.media;
+    this.currentAd = this.ads.getAd();
+    this.media.addEventListener("timeupdate", this.handleTimeUpdate);
+  };
+
+  DisplayAdds.prototype.handleTimeUpdate = function () {
+    var timeToUpdate = Math.floor(this.media.currentTime) % 30 === 0;
+
+    if (timeToUpdate && this.currentAd) {
+      this.renderAd();
+      this.currentAd = false;
+      this.renewAd();
+    }
+  };
+
+  DisplayAdds.prototype.renewAd = function () {
+    var _this = this;
+
+    setTimeout(function () {
+      _this.adContainer.innerHTML = "";
+
+      _this.adContainer.classList.remove("ads-background");
+
+      _this.currentAd = _this.ads.getAd();
+    }, 10000);
+  };
+
+  DisplayAdds.prototype.renderAd = function () {
+    var _this = this;
+
+    this.adContainer.classList.add("ads");
+    this.adContainer.classList.add("ads-background");
+    this.adContainer.innerHTML = "\n      <img\n        class=\"close-add\"\n        src=\"https://img.icons8.com/fluent-systems-regular/48/000000/xbox-x.png\"\n      />\n      <img\n        class=\"add-image\"\n        src=" + this.currentAd.imageUrl + "\n        alt=\"\"\n      />\n      <a href=" + this.currentAd.url + ">\n        <div class=\"add-information\">\n          <h3 class=\"add-title\">" + this.currentAd.title + "</h3>\n          <p class=\"add-description\">\n          " + this.currentAd.body + "\n          </p>\n        </div>\n      </a>\n ";
+    this.media.parentNode.insertBefore(this.adContainer, this.media);
+    var closeButton = document.querySelector(".close-add");
+    closeButton.addEventListener("click", function () {
+      _this.adContainer.innerHTML = "";
+
+      _this.adContainer.classList.remove("ads-background");
+    });
+  };
+
+  return DisplayAdds;
+}();
+
+exports.default = DisplayAdds;
+},{"./Ads":"media-player/plugins/Ads/Ads.ts"}],"media-player/index.ts":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -235,12 +392,14 @@ var AutoPlay_1 = __importDefault(require("./plugins/AutoPlay"));
 
 var AutoPause_1 = __importDefault(require("./plugins/AutoPause"));
 
+var Ads_1 = __importDefault(require("./plugins/Ads"));
+
 var playButton = document.querySelector(".play-container");
 var muteButton = document.querySelector(".mute-container");
 var miMedia = document.querySelector(".media-video");
 var myPlayer = new MediaPlayer_1.default({
   media: miMedia,
-  plugins: [new AutoPlay_1.default(), new AutoPause_1.default()]
+  plugins: [new AutoPause_1.default(), new AutoPlay_1.default(), new Ads_1.default()]
 });
 playButton.addEventListener("click", function () {
   var imageToToggle = document.querySelector(".play-button");
@@ -267,7 +426,7 @@ if ("serviceWorker" in navigator) {
     return console.log(error.message);
   });
 }
-},{"./MediaPlayer":"media-player/MediaPlayer.ts","./plugins/AutoPlay":"media-player/plugins/AutoPlay.ts","./plugins/AutoPause":"media-player/plugins/AutoPause.ts","./sw.js":[["media-player/sw.js","media-player/sw.js"],"media-player/sw.js.map","media-player/sw.js"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./MediaPlayer":"media-player/MediaPlayer.ts","./plugins/AutoPlay":"media-player/plugins/AutoPlay.ts","./plugins/AutoPause":"media-player/plugins/AutoPause.ts","./plugins/Ads":"media-player/plugins/Ads/index.ts","./sw.js":[["media-player/sw.js","media-player/sw.js"],"media-player/sw.js.map","media-player/sw.js"]}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -295,7 +454,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "35895" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45055" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -326,8 +485,9 @@ if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
         assetsToAccept.forEach(function (v) {
           hmrAcceptRun(v[0], v[1]);
         });
-      } else {
-        window.location.reload();
+      } else if (location.reload) {
+        // `location` global exists in a web worker context but lacks `.reload()` function.
+        location.reload();
       }
     }
 

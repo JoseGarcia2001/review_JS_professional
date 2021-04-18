@@ -11,17 +11,71 @@
 .media-container {
   margin: 0 auto;
   margin-top: 50px;
-  max-width: 800px;
-  width: 100%;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.media-container video {
-  margin: 40px;
+.video-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
   width: 100%;
+  max-width: 1024px;
+}
+
+.video-container video {
+  padding: 10px;
+  width: 100%;
+}
+
+.ads-background {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.ads {
+  position: absolute;
+  bottom: 0px;
+  display: grid;
+  grid-template-columns: 20% 80%;
+  align-items: center;
+  justify-items: center;
+  grid-template-rows: calc(100% - 10px);
+  width: calc(100% - 20px);
+  height: 25%;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.add-information {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+.add-title {
+  font-size: 16px;
+}
+
+.add-description {
+  font-size: 13px;
+}
+
+.add-image {
+  height: 90%;
+}
+
+.close-add {
+  cursor: pointer;
+  width: 20px;
+  top: 10px;
+  right: 10px;
+  position: absolute;
 }
 
 h1 {
